@@ -174,14 +174,9 @@ in {
         '' else
           "")));
 
-    home.sessionVariables = mkIf cfg.autostartOnShellStart.enable {
-      ZELLIJ_AUTO_ATTACH =
-        if cfg.autostartOnShellStart.attachExistingSession then
-          "true"
-        else
-          "false";
-      ZELLIJ_AUTO_EXIT =
-        if cfg.autostartOnShellStart.exitShellOnExit then "true" else "false";
+    home.sessionVariables = {
+      "ZELLIJ_AUTO_ATTACH" = if cfg.autostartOnShellStart.enable && cfg.autostartOnShellStart.attachExistingSession then "true" else "false";
+      "ZELLIJ_AUTO_EXIT"   = if cfg.autostartOnShellStart.enable && cfg.autostartOnShellStart.exitShellOnExit       then "true" else "false";
     };
   };
 }
